@@ -1,0 +1,26 @@
+{
+  "transaction_id": "123123",
+  "status_text": "Success",
+  "status": "0",
+  "time": 1674674676000,
+  "response": [
+    {
+      "key": "dasdsa",
+      "label_ru": "label in russian",
+      "label_uz": "label in uzbek",
+      "value": "Some value"
+    },
+    {
+      "key": "dasdsa",
+      "label_ru": "label in russian",
+      "label_uz": "label in uzbek",
+      "value": "Some value2"
+    },
+    {
+      "key": "dasdsa",
+      "label_ru": "label in russian",
+      "label_uz": "label in uzbek",
+      "value": null
+    }
+  ]
+}
