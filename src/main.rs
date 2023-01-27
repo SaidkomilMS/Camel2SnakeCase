@@ -37,7 +37,7 @@ struct TransactionCamel {
     statusText: String,
     status: String,
     time: u64,
-    response: Vec<ResponseItemCamel>
+    response: Option<Vec<ResponseItemCamel>>
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -46,7 +46,7 @@ struct TransactionSnake {
     status_text: String,
     status: String,
     time: u64,
-    response: Vec<ResponseItemSnake>
+    response: Option<Vec<ResponseItemSnake>>
 }
 
 impl TransactionSnake {
@@ -57,11 +57,17 @@ impl TransactionSnake {
             status: camel.status,
             time: camel.time,
             response: {
-                let mut result = Vec::<ResponseItemSnake>::new();
-                for i in camel.response {
-                    result.push(ResponseItemSnake::from_camel(i));
-                };
-                result
+                match camel.response {
+                    None => None,
+                    Some(x) => {
+                        let mut result = Vec::<ResponseItemSnake>::new();
+                        for i in x {
+                            result.push(ResponseItemSnake::from_camel(i));
+                        };
+                        Some(result)
+                    },
+                }
+                
             }
         }
     }
@@ -74,32 +80,7 @@ fn main()  -> Result<()> {
     // let output_path = "new.json";
 
     let data = r#"
-    {
-        "transactionId": "123123",
-        "statusText": "Success",
-        "status": "0",
-        "time": 1674674676000,
-        "response": [
-            {
-                "key": "dasdsa",
-                "labelRu": "label in russian",
-                "labelUz": "label in uzbek",
-                "value": "Some value"
-            },
-            {
-                "key": "dasdsa",
-                "labelRu": "label in russian",
-                "labelUz": "label in uzbek",
-                "value": "Some value2"
-            },
-            {
-                "key": "dasdsa",
-                "labelRu": "label in russian",
-                "labelUz": "label in uzbek",
-                "value": null
-            }
-        ]
-    }
+    {"state": 9, "tr_id": 556818443, "amount": 0, "cheque": {"time": 1674740234000, "status": "9", "response": null, "statusText": "Не найден номер клиента", "transactionId": "12018239343"}, "sender": null, "receiver": {"id": 556818443, "time": 1674740234325.7214, "fields": {"soato": "10207", "customer_code": "0711702"}, "service_id": 3213}, "commission": 0, "description": "Не найден номер клиента", "support_info": null}
     "#;
     // let transaction = {
     //     serde_json::from_str::<TransactionCamel>(data).unwrap()
