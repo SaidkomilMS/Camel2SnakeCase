@@ -33,19 +33,19 @@ impl ResponseItemSnake {
 
 #[derive(Debug, Deserialize, Serialize)]
 struct TransactionCamel {
-    transactionId: String,
+    transactionId: Option<String>,
     statusText: String,
     status: String,
-    time: u64,
+    time: Option<u64>,
     response: Option<Vec<ResponseItemCamel>>
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 struct TransactionSnake {
-    transaction_id: String,
+    transaction_id: Option<String>,
     status_text: String,
     status: String,
-    time: u64,
+    time: Option<u64>,
     response: Option<Vec<ResponseItemSnake>>
 }
 
@@ -67,7 +67,6 @@ impl TransactionSnake {
                         Some(result)
                     },
                 }
-                
             }
         }
     }
@@ -80,7 +79,7 @@ fn main()  -> Result<()> {
     // let output_path = "new.json";
 
     let data = r#"
-    {"state": 9, "tr_id": 556818443, "amount": 0, "cheque": {"time": 1674740234000, "status": "9", "response": null, "statusText": "Не найден номер клиента", "transactionId": "12018239343"}, "sender": null, "receiver": {"id": 556818443, "time": 1674740234325.7214, "fields": {"soato": "10207", "customer_code": "0711702"}, "service_id": 3213}, "commission": 0, "description": "Не найден номер клиента", "support_info": null}
+    {"transactionId":null,"status":"-4","statusText":"TransactionServerIsDown","time":null,"response":null}
     "#;
     // let transaction = {
     //     serde_json::from_str::<TransactionCamel>(data).unwrap()

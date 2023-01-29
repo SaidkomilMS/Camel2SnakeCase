@@ -1,7 +1,7 @@
 {
-  "transaction_id": "12018239343",
-  "status_text": "Не найден номер клиента",
-  "status": "9",
-  "time": 1674740234000,
+  "transaction_id": null,
+  "status_text": "TransactionServerIsDown",
+  "status": "-4",
+  "time": null,
   "response": null
 }
